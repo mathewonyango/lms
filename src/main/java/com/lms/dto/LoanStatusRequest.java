@@ -1,5 +1,7 @@
 package com.lms.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,11 +10,12 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoanStatusRequest {
-    
-    @NotBlank(message = "Customer number is required")
+    @JsonProperty("customerNumber")
     private String customerNumber;
+    
+    @JsonProperty("loanApplicationId")
+    private String loanApplicationId; // Optional: specific loan ID
 }

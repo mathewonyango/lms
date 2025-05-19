@@ -6,35 +6,44 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubscriptionResponse {
-    
-    public SubscriptionResponse(String customerNumber, String firstName, String lastName, Object object, boolean b) {
-        this.customerNumber = customerNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.message = object.toString();
-        this.subscriptionDate = LocalDateTime.now();
-        this.expiryDate = b ? LocalDateTime.now().plusYears(1) : null;
-        this.status = b ? "ACTIVE" : "INACTIVE";
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
+    @JsonProperty("customerNumber")
     private String customerNumber;
+    
+    @JsonProperty("isEligible")
+    private Boolean isEligible;
+    
+    @JsonProperty("subscriptionStatus")
+    private String subscriptionStatus; // ACTIVE, INACTIVE, PENDING, SUSPENDED
+    
+    @JsonProperty("eligibilityScore")
+    private Double eligibilityScore;
+    
+    @JsonProperty("maxLoanAmount")
+    private Double maxLoanAmount;
+    
+    @JsonProperty("customerName")
     private String customerName;
-    private String status;
+    
+    @JsonProperty("accountNumber")
+    private String accountNumber;
+    
+    @JsonProperty("subscriptionDate")
     private LocalDateTime subscriptionDate;
-    private LocalDateTime expiryDate;
+    
+    @JsonProperty("eligibilityReasons")
+    private List<String> eligibilityReasons;
+    
+    @JsonProperty("message")
     private String message;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private String loanStatus;
-    private String firstName;
-    private String lastName;
-
 }
+
 
